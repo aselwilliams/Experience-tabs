@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
-import {FaAngleDoubleRight} from 'react-icons/fa';
-import {ImSpinner9} from 'react-icons/im'
+import {FaAngleDoubleRight, FaSpinner} from 'react-icons/fa';
 import './App.css';
 const url='https://course-api.com/react-tabs-project';
 
@@ -21,7 +20,7 @@ fetchJobs();
   },[])
   
  if (loading){
-   return (<section className='section loading'><ImSpinner9 /></section>)
+   return (<section className='section loading'><FaSpinner size={56}/></section>)
  } 
   const {company,dates, duties, title} = jobs[value];
   return (
@@ -32,6 +31,13 @@ fetchJobs();
     </div>
     <div className="jobs-center">
       {/* btn-container */}
+      <div className="btn-container">
+        {jobs.map((item, index)=>{
+          return <button key={item.id} onClick={()=>setValue(index)} className={`job-btn ${index===value && 'active-btn'}`}>
+            {item.company}
+          </button>
+        })}
+      </div>
       {/* job-info */}
       <article className='job-info'>
     <h3>{title}</h3>
